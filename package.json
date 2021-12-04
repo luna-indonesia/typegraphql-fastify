@@ -8,7 +8,7 @@
     "postinstall": "npm run generate",
     "generate": "npx prisma generate",
     "studio": "npx prisma studio",
-    "migrate": "npx prisma migrate",
+    "migrate": "npx prisma migrate dev",
     "d:up": "docker-compose up -d",
     "d:db": "docker-compose up -d db",
     "d:down": "docker-compose down",

@@ -1,13 +1,16 @@
-version: '3.1'
+version: '3.6'
 
 services:
-
   db:
+    container_name: psqlDatabase
     image: postgres
-    restart: always
+    restart: on-failure
     ports:
       - 5432:5432
     env_file:
       - .env
     volumes:
-      - ./db-data/:/var/lib/postgresql/data/
+      - db-data:/var/lib/postgresql/data/
+
+volumes:
+  db-data:
