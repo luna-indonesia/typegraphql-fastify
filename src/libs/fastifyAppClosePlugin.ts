@@ -6,8 +6,8 @@ export const fastifyAppClosePlugin = (app: fastify.FastifyInstance) => {
       return {
         async drainServer() {
           await app.close();
-        }
+        },
       };
     },
   };
-}
+};
