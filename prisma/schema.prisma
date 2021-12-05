@@ -20,5 +20,5 @@ model User {
   id    String  @default(cuid()) @id @unique
   email String  @unique
   age   Int?
-  kind  UserKind
+  kind  UserKind[]
 }

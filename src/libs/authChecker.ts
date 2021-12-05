@@ -1,12 +1,11 @@
-import { AuthChecker } from '@interfaces';
-
+import { AuthChecker } from 'type-graphql';
 import { User } from '@generated/type-graphql/models/User';
 
 export const authChecker: AuthChecker<User> = (
   { context: { email } },
-  roles
+  kind
 ) => {
-  if (roles.length === 0) {
+  if (kind.length === 0) {
     // if `@Authorized()`, check only if user exists
     return email !== undefined;
   }
@@ -16,7 +15,7 @@ export const authChecker: AuthChecker<User> = (
     // and if no user, restrict access
     return false;
   }
-  if (roles.some((roles) => roles.includes(roles))) {
+  if (kind.some((roles) => roles.includes(roles))) {
     // grant access if the roles overlap
     return true;
   }

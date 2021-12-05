@@ -3,10 +3,11 @@ import * as fastify from 'fastify';
 import { ApolloServer } from 'apollo-server-fastify';
 import { ApolloServerPluginDrainHttpServer as apolloServerPluginDrainHttpServer } from 'apollo-server-core';
 import { buildSchema } from 'type-graphql';
-import { fastifyAppClosePlugin } from './fastifyAppClosePlugin';
-import { resolvers } from '@generated/type-graphql';
 import { PrismaClient } from '@prisma/client';
+
+import { resolvers } from '@generated/type-graphql';
 import { authChecker } from './authChecker';
+import { fastifyAppClosePlugin } from './fastifyAppClosePlugin';
 
 interface Context {
   prisma: PrismaClient;
