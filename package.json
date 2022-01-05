@@ -1,6 +1,6 @@
 {
   "name": "@luna/graphql-server",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "GraphQL Server template",
   "main": "index.js",
   "scripts": {
@@ -24,7 +24,8 @@
     "prisma": "^3.6.0",
     "reflect-metadata": "^0.1.13",
     "tslib": "^2.3.1",
-    "type-graphql": "^1.1.1"
+    "type-graphql": "^1.1.1",
+    "typegraphql-authchecker": "^0.1.2"
   },
   "devDependencies": {
     "@types/node": "^16.11.11",

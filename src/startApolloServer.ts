@@ -1,34 +1,26 @@
 import 'reflect-metadata';
 import * as fastify from 'fastify';
+import authChecker from 'typegraphql-authchecker';
 import { ApolloServer } from 'apollo-server-fastify';
-import { ApolloServerPluginDrainHttpServer as apolloServerPluginDrainHttpServer } from 'apollo-server-core';
+import { ApolloServerPluginDrainHttpServer as aspdhs } from 'apollo-server-core';
 import { buildSchema } from 'type-graphql';
-import { PrismaClient } from '@prisma/client';
+import { fastifyAppClosePlugin, Context, context } from '@libs';
 
 import { resolvers } from '@generated/type-graphql';
-import { authChecker } from './authChecker';
-import { fastifyAppClosePlugin } from './fastifyAppClosePlugin';
-
-interface Context {
-  prisma: PrismaClient;
-}
 
 export const startApolloServer = async () => {
   const app = fastify.fastify();
-  const prisma = new PrismaClient();
 
   const schema = await buildSchema({
     resolvers,
-    authChecker,
+    emitSchemaFile: true,
+    authChecker: authChecker,
   });
 
   const server = new ApolloServer({
     schema,
-    context: (): Context => ({ prisma }),
-    plugins: [
-      fastifyAppClosePlugin(app),
-      apolloServerPluginDrainHttpServer({ httpServer: app.server }),
-    ],
+    context: (): Context => context,
+    plugins: [fastifyAppClosePlugin(app), aspdhs({ httpServer: app.server })],
   });
 
   await server.start();
