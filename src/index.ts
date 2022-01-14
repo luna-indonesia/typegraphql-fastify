@@ -1,3 +1,3 @@
-import { startApolloServer } from './libs/startApolloServer';
+import { startApolloServer } from './startApolloServer';
 
 startApolloServer().catch(console.error);

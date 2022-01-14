@@ -10,7 +10,9 @@
     "migrate": "npx prisma migrate dev",
     "d:up": "docker-compose up -d",
     "d:db": "docker-compose up -d db",
+    "d:p": "docker-compose up -d proxy",
     "d:down": "docker-compose down",
+    "build": "tsc",
     "start": "nodemon --exec ts-node src/index.ts"
   },
   "author": "Muhammad Tsany Qudsi",

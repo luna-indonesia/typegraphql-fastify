@@ -4,12 +4,12 @@ import authChecker from 'typegraphql-authchecker';
 import { ApolloServer } from 'apollo-server-fastify';
 import { ApolloServerPluginDrainHttpServer as aspdhs } from 'apollo-server-core';
 import { buildSchema } from 'type-graphql';
-import { fastifyAppClosePlugin, Context, context } from '@libs';
+import { fastifyAppClosePlugin, Context, context } from './libs';
 
-import { resolvers } from '@generated/type-graphql';
+import { resolvers } from './generated/typegraphql';
 
 export const startApolloServer = async () => {
-  const app = fastify.fastify();
+  const app = fastify.fastify({ logger: true });
 
   const schema = await buildSchema({
     resolvers,
@@ -27,8 +27,11 @@ export const startApolloServer = async () => {
 
   app.register(server.createHandler());
 
-  await app.listen(4000, (error, address) => {
-    if (error) return app.log.error(error);
+  await app.listen(4000, '0.0.0.0', (error, address) => {
+    if (error) {
+      console.error(error);
+      process.exit(1);
+    }
     console.log(`Server is currently ready at ${address}${server.graphqlPath}`);
   });
 };

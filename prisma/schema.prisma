@@ -5,12 +5,14 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../src/generated/client"
+  binaryTargets = ["debian-openssl-1.1.x"]
 }
 
 generator typegraphql {
   provider = "typegraphql-prisma"
+  output   = "../src/generated/typegraphql"
 }
-
 enum UserKind {
   NORMAL
   ADMIN

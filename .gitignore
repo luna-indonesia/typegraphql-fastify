@@ -1,4 +1,12 @@
+# Common Files
 node_modules
+
+# Prisma
+prisma/migrations
+
+# Generated files
+src/generated
+dist
+
 # Keep environment variables out of version control
 .env
-prisma/migrations
