@@ -1,18 +1,15 @@
 FROM node:lts-bullseye-slim
 
 # Create app directory
-WORKDIR /usr/app
+WORKDIR /app
 
-COPY ./dist /dist
-COPY ./package.json /package.json
-COPY ./package-lock.json /package-lock.json
-COPY ./src/generated/client /dist/generated/client
-COPY .env .env
+COPY ./dist ./dist
+COPY ./package*.json ./
+COPY .env ./
 
-EXPOSE 4000
 RUN apt-get -qy update && apt-get -qy install openssl
 RUN npm i graphql-fields
-RUN NODE_ENV=$NODE_ENV npm install
+RUN npm install --production
 
-EXPOSE 8080
+EXPOSE 4000
 CMD [ "node", "dist/index.js" ]
