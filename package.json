@@ -1,6 +1,6 @@
 {
   "name": "@luna/graphql-server",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "GraphQL Server template",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,7 @@
     "d:db": "docker-compose up -d db",
     "d:p": "docker-compose up -d proxy",
     "d:down": "docker-compose down",
+    "prebuild": "npm run generate && cp -r ./src/generated/client ./dist/generated/client",
     "build": "tsc",
     "start": "nodemon --exec ts-node src/index.ts"
   },
