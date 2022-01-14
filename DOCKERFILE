@@ -5,7 +5,6 @@ WORKDIR /app
 
 COPY ./dist ./dist
 COPY ./package*.json ./
-COPY .env ./
 
 RUN apt-get -qy update && apt-get -qy install openssl
 RUN npm i graphql-fields

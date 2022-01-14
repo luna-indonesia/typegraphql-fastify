@@ -48,6 +48,8 @@ services:
       - db
     ports:
       - 4000:4000
+    env_file:
+      - .env
     labels:
       - "traefik.docker.network=public"
       - "traefik.enable=true"
