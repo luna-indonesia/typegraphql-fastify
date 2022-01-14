@@ -7,6 +7,7 @@ prisma/migrations
 # Generated files
 src/generated
 dist
+schema.gql
 
 # Keep environment variables out of version control
 .env
